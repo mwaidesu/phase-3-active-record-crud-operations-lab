@@ -1,11 +1,11 @@
 describe Movie do
   let(:movie) { Movie.new }
-  let(:attributes) do 
+  let(:attributes) do
     {
-      title: "The Sting",
+      title: 'The Sting',
       release_date: 1973,
-      director: "George Roy Hill",
-      lead: "Paul Newman",
+      director: 'George Roy Hill',
+      lead: 'Paul Newman',
       in_theaters: false
     }
   end
@@ -15,8 +15,8 @@ describe Movie do
   end
 
   it 'has a title' do
-    movie.title = "The Matrix"
-    expect(movie.title).to eq("The Matrix")
+    movie.title = 'The Matrix'
+    expect(movie.title).to eq('The Matrix')
   end
 
   it 'has a release date' do
@@ -25,13 +25,13 @@ describe Movie do
   end
 
   it 'has a director' do
-    movie.director = "The Wachowski Sisters"
-    expect(movie.director).to eq("The Wachowski Sisters")
+    movie.director = 'The Wachowski Sisters'
+    expect(movie.director).to eq('The Wachowski Sisters')
   end
 
   it 'has a lead actor/actress' do
-    movie.lead = "Keanu Reeves"
-    expect(movie.lead).to eq("Keanu Reeves")
+    movie.lead = 'Keanu Reeves'
+    expect(movie.lead).to eq('Keanu Reeves')
   end
 
   it 'has an in theaters flag' do
@@ -44,38 +44,36 @@ describe Movie do
   end
 
   describe 'Create' do
-
     describe '.create_with_title' do
       it 'saves the title to the movie' do
-        titled_movie = Movie.create_with_title("This is a title.")
-        expect(titled_movie.title).to eq("This is a title.")
+        titled_movie = Movie.create_with_title('This is a title.')
+        expect(titled_movie.title).to eq('This is a title.')
       end
-  
+
       it 'creates a new record in the database' do
-        expect { Movie.create_with_title("This is a title.") }.to change(Movie, :count).by(1)
+        expect { Movie.create_with_title('This is a title.') }.to change(Movie, :count).by(1)
       end
     end
-
   end
 
   describe 'Read' do
     before do
-      Movie.create(title: "Movie_0", release_date: 2000)
-      Movie.create(title: "Movie_1", release_date: 2001)
-      Movie.create(title: "Movie_2", release_date: 2002)
-      Movie.create(title: "Movie_3", release_date: 2003)
-      Movie.create(title: "Movie_4", release_date: 2004)
+      Movie.create(title: 'Movie_0', release_date: 2000)
+      Movie.create(title: 'Movie_1', release_date: 2001)
+      Movie.create(title: 'Movie_2', release_date: 2002)
+      Movie.create(title: 'Movie_3', release_date: 2003)
+      Movie.create(title: 'Movie_4', release_date: 2004)
     end
-    
+
     describe '.first_movie' do
       it 'returns the first item in the movies table' do
-        expect(Movie.first_movie.title).to eq("Movie_0")
+        expect(Movie.first_movie.title).to eq('Movie_0')
       end
     end
-    
+
     describe '.last_movie' do
       it 'returns the first item in the movies table' do
-        expect(Movie.last_movie.title).to eq("Movie_4")
+        expect(Movie.last_movie.title).to eq('Movie_4')
       end
     end
 
@@ -87,14 +85,14 @@ describe Movie do
 
     describe '.find_movie_with_id' do
       it 'returns the movie with the corresponding id' do
-        expect(Movie.find_movie_with_id(1).title).to eq("Movie_0")
+        expect(Movie.find_movie_with_id(1).title).to eq('Movie_0')
       end
     end
 
     describe '.find_movie_with_attributes' do
       it 'returns the movie with the corresponding attributes' do
-        found_movie = Movie.find_movie_with_attributes(title: "Movie_0", release_date: 2000)
-        expect(found_movie.title).to eq("Movie_0")
+        found_movie = Movie.find_movie_with_attributes(title: 'Movie_0', release_date: 2000)
+        expect(found_movie.title).to eq('Movie_0')
       end
     end
 
@@ -103,45 +101,43 @@ describe Movie do
         found_movies = Movie.find_movies_after_2002
 
         expect(found_movies).to match_array([
-          have_attributes(class: Movie, title: "Movie_3", release_date: 2003),
-          have_attributes(class: Movie, title: "Movie_4", release_date: 2004)
-        ])
+                                              have_attributes(class: Movie, title: 'Movie_3', release_date: 2003),
+                                              have_attributes(class: Movie, title: 'Movie_4', release_date: 2004)
+                                            ])
       end
     end
-
   end
 
   describe 'Update' do
-
     describe '#update_with_attributes' do
       it 'updates one movie' do
-        movie = Movie.create(title: "Awesome Flick")
-  
-        expect do 
-          movie.update_with_attributes(title: "Even Awesomer Flick")
-        end.to change(movie, :title).from("Awesome Flick").to("Even Awesomer Flick")
+        movie = Movie.create(title: 'Awesome Flick')
+
+        expect do
+          movie.update_with_attributes(title: 'Even Awesomer Flick')
+        end.to change(movie, :title).from('Awesome Flick').to('Even Awesomer Flick')
       end
     end
 
     describe '.update_all_titles' do
       it 'updates the title of all the movies' do
-        Movie.create(title: "Awesome Flick")
-        Movie.create(title: "Even Awesomer Flick")
-        
-        Movie.update_all_titles("Untitled")
-  
-        expect(Movie.where(title: "Untitled").count).to be(2)
+        Movie.create(title: 'Awesome Flick')
+        Movie.create(title: 'Even Awesomer Flick')
+
+        Movie.update_all_titles('Untitled')
+
+        expect(Movie.where(title: 'Untitled').count).to be(2)
       end
     end
   end
 
   describe 'Delete' do
     before do
-      Movie.create(title: "Movie_0", release_date: 2000)
-      Movie.create(title: "Movie_1", release_date: 2001)
-      Movie.create(title: "Movie_2", release_date: 2002)
-      Movie.create(title: "Movie_3", release_date: 2003)
-      Movie.create(title: "Movie_4", release_date: 2004)
+      Movie.create(title: 'Movie_0', release_date: 2000)
+      Movie.create(title: 'Movie_1', release_date: 2001)
+      Movie.create(title: 'Movie_2', release_date: 2002)
+      Movie.create(title: 'Movie_3', release_date: 2003)
+      Movie.create(title: 'Movie_4', release_date: 2004)
     end
 
     describe '.delete_by_id' do
@@ -156,5 +152,4 @@ describe Movie do
       end
     end
   end
-
 end
